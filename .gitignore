@@ -1,0 +1,6 @@
+.idea
+coverage
+coverage.zip
+tmp
+node_modules
+npm-debug.log

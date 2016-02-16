@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "description": "Javascript development toolbox taskrunner",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richardregeer/gulp-js-dev-toolbox"
+  },
+  "dependencies": {
+    "del": "2.2.*",
+    "file-exists": "1.0.*",
+    "gulp": "3.9.*",
+    "gulp-help": "1.6.*",
+    "gulp-if": "2.0.*",
+    "gulp-install": "^0.6.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-shell": "0.5.*",
+    "gulp-util": "3.0.*",
+    "lodash": "4.2.*",
+    "minimist": "1.2.*",
+    "require-dir": "0.3.*"
+  },
+  "devDependencies": {
+    "jscs": "^2.10.1",
+    "jshint": "^2.9.1"
+  },
+  "author": "Richard Regeer",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}

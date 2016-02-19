@@ -1,5 +1,6 @@
 {
-  "version": "0.1.0",
+  "name": "gulp-js-dev-toolbox",
+  "version": "0.2.0",
   "description": "Javascript development toolbox taskrunner",
   "main": "gulpfile.js",
   "repository": {
@@ -20,10 +21,19 @@
     "minimist": "1.2.*",
     "require-dir": "0.3.*"
   },
+  "scripts": {
+    "postinstall": "./bin/setup-toolbox"
+  },
   "devDependencies": {
     "jscs": "^2.10.1",
     "jshint": "^2.9.1"
   },
+  "keywords": [
+    "Testing", "Javascript", "Nodejs", "Unittest", "Codestyle", "CI",
+    "Code complexity", "jshint", "jscs", "npm", "Gulp", "mocha",
+    "Taskrunner", "Toolbox", "Code coverage", "Check styling",
+    "linting"
+  ],
   "author": "Richard Regeer",
   "license": "MIT",
   "readmeFilename": "README.md"

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Installing the js dev toolbox tasks to the project."
+
+DEST=../../
+SRC=$(pwd)
+
+cd $SRC
+
+cp gulpfile.js $DEST
+cp dev-toolbox.config.json $DEST
+cp -r tasks $DEST
+cp -r node_modules $DEST
+cd $DEST
+npm install gulp -g
+
+echo "Js toolbox installation is finished. Use 'gulp help' to see all the available tasks."

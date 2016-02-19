@@ -7,9 +7,9 @@ SRC=$(pwd)
 
 cd $SRC
 
-cp gulpfile.js $DEST
-cp dev-toolbox.config.json $DEST
-cp -r tasks $DEST
+cp -n gulpfile.js $DEST
+cp -n dev-toolbox.config.json $DEST
+cp -r -n tasks $DEST
 cp -r node_modules $DEST
 cd $DEST
 npm install gulp -g

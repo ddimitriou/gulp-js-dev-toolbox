@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var minimist = require('minimist');
 var gutil = require('gulp-util');
+var istanbul = require('gulp-istanbul');
 
 var knownOptions = {
   string: ['test', 'source']
@@ -33,7 +34,7 @@ gulp.task('tests', 'Run the selected unit tests with mocha. Default run the test
 
   source = projectRoot + _.trimStart(source, '/');
 
-  if (commandLineOptions.source) {
+  if (commandLineOptions.test) {
     options.grep = commandLineOptions.test;
     gutil.log(gutil.colors.blue('Run test ' + commandLineOptions.test));
   }
@@ -49,6 +50,45 @@ gulp.task('tests', 'Run the selected unit tests with mocha. Default run the test
   options: {
     source: 'The file or directory to test. Example gulp tests --source=tests/**/*.js',
     test: 'Run a single test in the given test file or directory. Example gulp tests --test [testname]'
+  }
+});
+
+gulp.task('tests-coverage', 'Run the unittests with code coverage using mocha and istanbul.', function () {
+  var options = {};
+  var sources, tests;
+
+  sources = ['lib/**/*.js'];
+  tests = ['tests/**/*.js'];
+
+  if (commandLineOptions.source) {
+    sources = _.split(commandLineOptions.source, ',');
+  } else if (_.has(gulp.task.configuration, 'tasks.tests-coverage.source')) {
+    sources = gulp.task.configuration.tasks['tests-coverage'].source;
+    gutil.log(gutil.colors.blue('Read source from the configuration file: ' + sources));
+  }
+
+  if (commandLineOptions.tests) {
+    tests = _.split(commandLineOptions.tests, ',');
+  } else if (_.has(gulp.task.configuration, 'tasks.tests-coverage.tests')) {
+    tests = gulp.task.configuration.tasks['tests-coverage'].tests;
+    gutil.log(gutil.colors.blue('Read tests from the configuration file: ' + tests));
+  }
+
+  if (_.has(gulp.task.configuration, 'tasks.tests-coverage.options')) {
+    _.merge(options, gulp.task.configuration.tasks['tests-coverage'].options);
+    gutil.log(gutil.colors.blue('Read options from the configuration file and combine with the given arguments.'));
+  }
+
+  return gulp.src(sources)
+    .pipe(istanbul())
+    .pipe(istanbul.hookRequire())
+    .pipe(gulp.src(tests))
+    .pipe(mocha(options))
+    .pipe(istanbul.writeReports());
+}, {
+  options: {
+    source: 'The directory to sources files are located. Example gulp tests-coverage --source=lib/**/*.js',
+    tests: 'The directory to test are located. Example gulp tests-coverage --tests=tests/**/*.js'
   }
 });
 

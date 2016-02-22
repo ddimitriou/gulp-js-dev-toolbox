@@ -21,4 +21,11 @@ if (!configuration.projectRoot) {
 
 configuration.projectRoot = gulp.task.configuration.projectRoot.trim('/');
 
+gulp.task('pre-commit', false, ['clear-debug'], function () {
+  gulp.start('pre-commit:checkstyle');
+});
+
+gulp.task('pre-commit:checkstyle', false, ['checkstyle'], function () {
+  gulp.start('tests');
+});
 gulp.task('default', ['checkstyle', 'tests']);

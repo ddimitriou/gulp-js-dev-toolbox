@@ -8,7 +8,7 @@ var gutil = require('gulp-util');
 var istanbul = require('gulp-istanbul');
 
 var knownOptions = {
-  string: ['test', 'source']
+  string: ['test', 'source', 'watch']
 };
 
 var commandLineOptions = minimist(process.argv.slice(2), knownOptions);
@@ -93,26 +93,25 @@ gulp.task('tests-coverage', 'Run the unittests with code coverage using mocha an
 });
 
 gulp.task('watch-tests', 'Watch for file changes and execute the tests task. Default the tests/ directory will be watched.', function () {
-  var projectRoot = gulp.task.configuration.projectRoot;
-  var source = projectRoot + 'tests/**/*.js';
+  var watch = ['tests/**/*.js'];
 
-  if (commandLineOptions.source) {
-    source = commandLineOptions.source;
-  } else if (_.has(gulp.task.configuration, 'tasks.watch-tests.source')) {
-    source = gulp.task.configuration.tasks['watch-tests'].source;
-    gutil.log(gutil.colors.blue('Read source from the configuration file: ' + source));
+  if (commandLineOptions.watch) {
+    watch = _.split(commandLineOptions.watch, ',');
+  } else if (_.has(gulp.task.configuration, 'tasks.watch-tests.watch')) {
+    watch = gulp.task.configuration.tasks['watch-tests'].watch;
+    gutil.log(gutil.colors.blue('Read watch from the configuration file: ' + watch));
   }
 
-  source = projectRoot + _.trimStart(source, '/');
+  gutil.log(gutil.colors.blue('Watch directory ' + watch + ' for changes and run the tests on.'));
 
-  gutil.log(gutil.colors.blue('Watch directory ' + source + ' for changes and run the tests on.'));
-  gulp.watch(source, ['tests']);
+  _.forEach(watch, function addWatch(item) {
+    gulp.watch(item, ['tests']);
+  });
 }, {
   options: {
     test: 'The test to run when a file is changed. Example gulp watch-tests --test "Some unit test"',
-    source: 'The directory to watch for file changes. Default the tests directory will be watched. Example gulp watch-tests ' +
-      '--source=tests/**/*.js'
+    watch: 'The directory to watch for file changes. Default the tests directory will be watched. Example gulp watch-tests ' +
+      '--watch=tests/**/*.js'
   }
 });
-
 gulp.task('default', ['tests']);

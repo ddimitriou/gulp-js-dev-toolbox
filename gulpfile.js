@@ -21,7 +21,7 @@ if (!configuration.projectRoot) {
 
 configuration.projectRoot = gulp.task.configuration.projectRoot.trim('/');
 
-gulp.task('pre-commit', false, ['clear-debug'], function () {
+gulp.task('pre-commit', 'Run codestyling and tests before you create your commit.', ['clear-debug'], function () {
   gulp.start('pre-commit:checkstyle');
 });
 

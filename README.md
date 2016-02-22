@@ -19,13 +19,13 @@ To see all the available tasks
 gulp help
 ```
 
-The task are using gulp plugins to call various php tools like [mocha](http://mochajs.org/), [istanbul](https://github.com/gotwarlost/istanbul), [npm](https://www.npmjs.com/), [jshint](https://github.com/jshint/jshint), [jscs](https://github.com/jscs-dev/node-jscs)
+The task are using gulp plugins to call various javascript tools like [mocha](http://mochajs.org/), [istanbul](https://github.com/gotwarlost/istanbul), [npm](https://www.npmjs.com/), [jshint](https://github.com/jshint/jshint), [jscs](https://github.com/jscs-dev/node-jscs)
 The available tasks will be listed with a description and available arguments or aliases.
 
 If no task name is given the **default task** will be executed. This will run all the tasks that are defined in the default task. Currently this is tests and check code styling.
 
 # Configuration
-For the most js tools there's a configuration file available. If the tool has a configuration file available it **should be available in your project root**.
+For the most javascript tools there's a configuration file available. If the tool has a configuration file available it **should be available in your project root**.
 
 Tasks that don't have a configuration file available have a default configuration and can be overridden by using command line arguments or the **dev-toolbox.config.json**. The tasks always use the tools that are installed locally by your npm dependencies. If npm has not installed the required tool, it will always be installed before the task will run. The tools can be found in **node_modules/.bin** in your project root.
 

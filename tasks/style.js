@@ -9,6 +9,7 @@ var jscs = require('gulp-jscs');
 var stylish = require('gulp-jscs-stylish');
 var gulpif = require('gulp-if');
 var fixmyjs = require('gulp-fixmyjs');
+var replace = require('gulp-replace');
 
 var knownOptions = {
   string: ['source']
@@ -86,6 +87,35 @@ gulp.task('codestyle', 'Check the js codestyle using jscs. Default lib/ and test
     'source': 'The source files to check the js codestyle. To add multiple sources use a \',\'.Example gulp codestyle ' +
       '--source=lib/**/*.js,tests/**/*.js',
     'fix': 'Auto fix the code style errors found. Exampe gulp codestyle --fix'
+  }
+});
+
+gulp.task('clear-debug', 'Remove all debug code like console.log. Default lib/ and tests/ directories are checked.', function () {
+  var projectRoot = gulp.task.configuration.projectRoot;
+  var sources;
+
+  sources = ['lib/**/*.js', 'tests/**/*.js'];
+
+  if (commandLineOptions.source) {
+    sources = _.split(commandLineOptions.source, ',');
+  } else if (_.has(gulp.task.configuration, 'tasks.clear-debug.source')) {
+    sources = gulp.task.configuration.tasks['clear-debug'].source;
+    gutil.log(gutil.colors.blue('Read source from the configuration file: ' + sources));
+  }
+
+  sources = _.map(sources, function (sourceValue) {
+    return projectRoot + _.trimStart(sourceValue, '/');
+  });
+
+  return gulp.src(sources)
+    .pipe(replace(/console.log(.*)\;/g, ''))
+    .pipe(gulp.dest(function (file) {
+      return file.base;
+    }));
+}, {
+  options: {
+    'source': 'The source files to remove the debug code. To add multiple sources use a \',\'.Example gulp clear-debug ' +
+      '--source=lib/**/*.js,tests/**/*.js'
   }
 });
 

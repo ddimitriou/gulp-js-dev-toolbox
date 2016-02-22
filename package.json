@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-dev-toolbox",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Javascript development toolbox taskrunner",
   "main": "gulpfile.js",
   "repository": {

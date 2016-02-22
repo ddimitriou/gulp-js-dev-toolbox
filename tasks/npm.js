@@ -7,7 +7,6 @@ var del = require('del');
 var gutil = require('gulp-util');
 var prompt = require('gulp-prompt');
 var shell = require('gulp-shell');
-var git = require('gulp-git');
 
 var knownOptions = {
   boolean: ['force']
@@ -46,9 +45,7 @@ gulp.task('bump', 'Bump package version and push to origin.', function () {
       choices: ['patch', 'minor', 'major']
     }, function (result) {
       return gulp.src('')
-        .pipe(shell(['npm version ' + result.bump]), function() {
-          git.push('origin', 'master');
-        });
+        .pipe(shell(['npm version ' + result.bump, 'git push']));
     }));
 });
 

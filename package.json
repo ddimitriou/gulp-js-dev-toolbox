@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-dev-toolbox",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "description": "Javascript development toolbox",
   "main": "gulpfile.js",
   "repository": {
@@ -8,27 +8,9 @@
     "url": "https://github.com/richardregeer/gulp-js-dev-toolbox"
   },
   "dependencies": {
-    "del": "2.2.*",
-    "file-exists": "1.0.*",
-    "gulp": "3.9.*",
-    "gulp-fixmyjs": "^1.0.2",
-    "gulp-help": "1.6.*",
-    "gulp-if": "2.0.*",
-    "gulp-install": "^0.6.0",
-    "gulp-istanbul": "^0.10.3",
-    "gulp-jscs": "^3.0.2",
-    "gulp-jscs-stylish": "^1.3.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-prompt": "^0.1.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-shell": "0.5.*",
-    "gulp-strip-debug": "^1.1.0",
-    "gulp-util": "3.0.*",
-    "jshint-stylish": "^2.1.0",
+    "gulp-git": "^1.7.2",
     "lodash": "4.2.*",
-    "minimist": "1.2.*",
-    "require-dir": "0.3.*"
+    "semver": "^5.1.0"
   },
   "scripts": {
     "postinstall": "./bin/setup-toolbox"

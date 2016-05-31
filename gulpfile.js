@@ -25,7 +25,10 @@ gulp.task('pre-commit', 'Run codestyling and tests before you create your commit
   gulp.start('pre-commit:checkstyle');
 });
 
+gulp.task('post-commit', 'Bump the package version after your commit.', ['bump']);
+
 gulp.task('pre-commit:checkstyle', false, ['checkstyle'], function () {
   gulp.start('tests');
 });
+
 gulp.task('default', ['checkstyle', 'tests']);

@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-dev-toolbox",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Javascript development toolbox",
   "main": "gulpfile.js",
   "repository": {
@@ -8,9 +8,7 @@
     "url": "https://github.com/richardregeer/gulp-js-dev-toolbox"
   },
   "dependencies": {
-    "gulp-git": "^1.7.2",
-    "lodash": "4.2.*",
-    "semver": "^5.1.0"
+    "lodash": "4.2.*"
   },
   "scripts": {
     "postinstall": "./bin/setup-toolbox"
